@@ -1,0 +1,24 @@
+{
+    "name": "holoyan/eloquent-filter",
+    "description": "Laravel model filter, easy and powerful",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Artak",
+            "email": "artaksafaryanc@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "orchestra/testbench": "^3.9.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "holoyan\\EloquentFilter\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "holoyan\\EloquentFilter\\Tests\\": "tests/"
+        }
+    }
+}
