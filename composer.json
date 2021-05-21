@@ -9,7 +9,8 @@
         }
     ],
     "require-dev": {
-        "orchestra/testbench": "^3.9.4"
+        "orchestra/testbench": "^3.9.4",
+        "fzaninotto/faker": "^1.5"
     },
     "autoload": {
         "psr-4": {

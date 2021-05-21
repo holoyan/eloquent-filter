@@ -5,7 +5,7 @@
          colors="true"
 >
     <testsuites>
-        <testsuite name="Permissions Test Suite">
+        <testsuite name="Eloquent filter Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
@@ -17,5 +17,7 @@
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="CACHE_DRIVER" value="array"/>
+        <server name="DB_CONNECTION" value="sqlite"/>
+        <server name="DB_DATABASE" value=":memory:"/>
     </php>
 </phpunit>

@@ -41,7 +41,7 @@ abstract class Filter
      *
      * @return array
      */
-    abstract public function rules(): array;
+    abstract public function rules();
 
     /**
      * @return $this

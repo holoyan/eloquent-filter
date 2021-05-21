@@ -90,6 +90,8 @@ class SimpleRule extends FilterRule
                 case self::LIKE_COMPARISON_TYPES['both'] : {
                     return "%{$filterValue}%";
                 }
+                default:
+                    return "%{$filterValue}%";
             }
         }
 
