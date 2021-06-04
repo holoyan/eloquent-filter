@@ -2,6 +2,8 @@
 
 namespace holoyan\EloquentFilter\Tests;
 
+use Carbon\Carbon;
+
 class FilterTest extends BaseTestCase
 {
 
@@ -110,6 +112,55 @@ class FilterTest extends BaseTestCase
 
         $filteredUser = User::filter($request, UserFilter::class)->get();
         $this->assertEquals($actualCount, $filteredUser->count());
+    }
+
+
+    /**
+     * @test
+     */
+    public function custom_rule_test()
+    {
+        $user = User::inRandomOrder()->first();
+        $date = Carbon::createFromDate($user->b_date);
+
+        $between = [
+            $date->subDay()->toDateTimeString(),
+            $date->addDays(5)->toDateTimeString(),
+        ];
+
+        $outDate1 = [
+            $date->subDays(10),
+            $date->subDays(3),
+        ];
+
+        $outDate2 = [
+            $date->addDays(10),
+            $date->addDays(12),
+        ];
+
+        $request1 = [
+            'email' => $user->email,
+            'b_date' => $between,
+        ];
+
+        $request2 = [
+            'email' => $user->email,
+            'b_date' => $outDate1,
+        ];
+
+        $request3 = [
+            'email' => $user->email,
+            'b_date' => $outDate1,
+        ];
+
+        $filteredUser = User::filter($request1, UserFilter::class)->get();
+        $this->assertEquals(1, $filteredUser->count());
+
+        $filteredUser = User::filter($request2, UserFilter::class)->get();
+        $this->assertEquals(0, $filteredUser->count());
+
+        $filteredUser = User::filter($request3, UserFilter::class)->get();
+        $this->assertEquals(0, $filteredUser->count());
     }
 
 }

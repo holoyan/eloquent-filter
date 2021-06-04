@@ -21,7 +21,8 @@ class UserFilter extends Filter
             'products' => RelationRule::make()->setRelation('products')->setRules([
                 'name' => SimpleRule::make(),
                 'user_id' => SimpleRule::make()
-            ])
+            ]),
+            'b_date' => DateRule::make()
         ];
     }
 }
