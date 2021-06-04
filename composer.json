@@ -1,6 +1,7 @@
 {
     "name": "holoyan/eloquent-filter",
-    "description": "Laravel model filter, easy and powerful",
+    "description": "Eloquent filter for laravel models, easy and powerful",
+    "homepage": "https://github.com/holoyan/eloquent-filter",
     "license": "MIT",
     "authors": [
         {
@@ -8,6 +9,9 @@
             "email": "artaksafaryanc@gmail.com"
         }
     ],
+    "require": {
+        "php": ">=7.1"
+    },
     "require-dev": {
         "orchestra/testbench": "^3.9.4",
         "fzaninotto/faker": "^1.5"
