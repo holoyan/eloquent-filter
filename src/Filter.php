@@ -9,26 +9,25 @@ use Illuminate\Support\Arr;
 abstract class Filter
 {
     /**
-     * Builder on which filter rules will be applied
+     * Builder on which filter rules will be applied.
      *
      * @var Builder
      */
     private $builder;
 
     /**
-     * Filter requests
+     * Filter requests.
      *
      * @var array
      */
     private $filterRequests;
 
     /**
-     * Filter rules, define how each filter request should be handled
+     * Filter rules, define how each filter request should be handled.
      *
      * @var FilterRule array
      */
     private $rules;
-
 
     public function __construct(Builder $builder, array $filterRequests)
     {
@@ -38,7 +37,7 @@ abstract class Filter
     }
 
     /**
-     * Returns rules defined in derived class
+     * Returns rules defined in derived class.
      *
      * @return array
      */

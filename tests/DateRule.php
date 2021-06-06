@@ -1,14 +1,11 @@
 <?php
 
-
 namespace holoyan\EloquentFilter\Tests;
-
 
 use holoyan\EloquentFilter\Rules\FilterRule;
 
 class DateRule extends FilterRule
 {
-
     /**
      * @param string $filterKey
      * @param $filterValue
