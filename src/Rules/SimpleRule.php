@@ -72,6 +72,42 @@ class SimpleRule extends FilterRule
         return $this->operator ?? self::DEFAULT_OPERATOR;
     }
 
+    /**
+     * @return $this
+     */
+    public function startsWith()
+    {
+        $this->setOperator(self::LIKE_OPERATOR)->setComparisonType(self::LIKE_COMPARISON_TYPES['left']);
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function endsWith()
+    {
+        $this->setOperator(self::LIKE_OPERATOR)->setComparisonType(self::LIKE_COMPARISON_TYPES['right']);
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function contains()
+    {
+        $this->setOperator(self::LIKE_OPERATOR)->setComparisonType(self::LIKE_COMPARISON_TYPES['both']);
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function exactMatch()
+    {
+        $this->operator = self::DEFAULT_OPERATOR;
+        return $this;
+    }
+
 
     /**
      * @param mixed $filterValue

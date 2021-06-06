@@ -2,6 +2,7 @@
 
 namespace holoyan\EloquentFilter;
 
+use holoyan\EloquentFilter\Rules\FilterRule;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 
@@ -24,7 +25,7 @@ abstract class Filter
     /**
      * Filter rules, define how each filter request should be handled
      *
-     * @var array
+     * @var FilterRule array
      */
     private $rules;
 
@@ -50,7 +51,10 @@ abstract class Filter
     {
         foreach ($this->filterRequests as $requestKey => $requestValue) {
             if ($rule = Arr::get($this->rules, $requestKey)) {
-                $rule->setBuilder($this->builder)->handle($requestKey, $requestValue);
+                $rule->setBuilder($this->builder)->handle(
+                    $rule->getColumn($requestKey),
+                    $rule->getValue($requestValue)
+                );
             }
         }
 
