@@ -1,11 +1,9 @@
 <?php
 
-
 namespace holoyan\EloquentFilter;
 
 trait Filterable
 {
-
     public function scopeFilter($query, array $requestFilter, $class = null)
     {
         $class = $class ?? $this->getFilterClass();
@@ -18,6 +16,6 @@ trait Filterable
      */
     private function getFilterClass(): string
     {
-        return static::$filterClass ?? "App\\Http\\Filters\\" . class_basename(static::class) . "Filter";
+        return static::$filterClass ?? 'App\\Http\\Filters\\'.class_basename(static::class).'Filter';
     }
 }
