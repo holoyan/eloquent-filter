@@ -49,7 +49,7 @@ PHP >= 7.1
 ]
 
 ```
- To filter by all those parameters we can simple write
+ To filter by all those parameters we can simply write
  
    ```php
     
