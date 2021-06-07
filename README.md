@@ -15,6 +15,7 @@ PHP >= 7.1
  - [Nested Filter (Relation Filter)](#nested-filter)
  - [Extending filter](#extending-filter)
    - [Custom Rules](#custom-rules)
+ - [Credits](#credits)
  - [License](#license) 
  
  
@@ -277,6 +278,9 @@ Thats all, now you can use custom rule;
 
 ```
 
+## Credits
+
+Inspired by [and-m-a](https://github.com/and-m-a)
 
 ## License
 
