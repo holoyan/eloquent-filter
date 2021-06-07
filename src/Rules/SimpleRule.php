@@ -73,7 +73,7 @@ class SimpleRule extends FilterRule
      */
     public function startsWith()
     {
-        $this->setOperator(self::LIKE_OPERATOR)->setComparisonType(self::LIKE_COMPARISON_TYPES['left']);
+        $this->setOperator(self::LIKE_OPERATOR)->setComparisonType(self::LIKE_COMPARISON_TYPES['right']);
 
         return $this;
     }
@@ -83,7 +83,7 @@ class SimpleRule extends FilterRule
      */
     public function endsWith()
     {
-        $this->setOperator(self::LIKE_OPERATOR)->setComparisonType(self::LIKE_COMPARISON_TYPES['right']);
+        $this->setOperator(self::LIKE_OPERATOR)->setComparisonType(self::LIKE_COMPARISON_TYPES['left']);
 
         return $this;
     }
