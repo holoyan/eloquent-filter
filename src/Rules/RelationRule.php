@@ -1,8 +1,6 @@
 <?php
 
-
 namespace holoyan\EloquentFilter\Rules;
-
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
@@ -55,6 +53,7 @@ class RelationRule extends FilterRule
 
     /**
      * @param array $types
+     *
      * @return RelationRule
      */
     public function setTypes(array $types): self
@@ -66,6 +65,7 @@ class RelationRule extends FilterRule
 
     /**
      * @param string $relation
+     *
      * @return RelationRule
      */
     public function setRelation(string $relation): RelationRule
@@ -77,6 +77,7 @@ class RelationRule extends FilterRule
 
     /**
      * @param array $rules
+     *
      * @return RelationRule
      */
     public function setRules(array $rules): RelationRule
@@ -104,6 +105,7 @@ class RelationRule extends FilterRule
 
     /**
      * @param string $requestKey
+     *
      * @return string
      */
     public function getRelation(string $requestKey): string

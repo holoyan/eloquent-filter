@@ -1,12 +1,6 @@
 <?php
 
-
 namespace holoyan\EloquentFilter\Rules;
-
-
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Query\Expression;
-use Illuminate\Support\Str;
 
 class SimpleRule extends FilterRule
 {
@@ -15,9 +9,9 @@ class SimpleRule extends FilterRule
     public const LIKE_OPERATOR = 'like';
 
     public const LIKE_COMPARISON_TYPES = [
-        'left' => 1,
+        'left'  => 1,
         'right' => 2,
-        'both' => 3
+        'both'  => 3,
     ];
 
     /**
@@ -44,6 +38,7 @@ class SimpleRule extends FilterRule
 
     /**
      * @param string $operator
+     *
      * @return $this
      */
     public function setOperator(string $operator): self
@@ -55,6 +50,7 @@ class SimpleRule extends FilterRule
 
     /**
      * @param int $comparisonType
+     *
      * @return SimpleRule
      */
     public function setComparisonType(int $comparisonType): SimpleRule
@@ -78,6 +74,7 @@ class SimpleRule extends FilterRule
     public function startsWith()
     {
         $this->setOperator(self::LIKE_OPERATOR)->setComparisonType(self::LIKE_COMPARISON_TYPES['left']);
+
         return $this;
     }
 
@@ -87,6 +84,7 @@ class SimpleRule extends FilterRule
     public function endsWith()
     {
         $this->setOperator(self::LIKE_OPERATOR)->setComparisonType(self::LIKE_COMPARISON_TYPES['right']);
+
         return $this;
     }
 
@@ -96,6 +94,7 @@ class SimpleRule extends FilterRule
     public function contains()
     {
         $this->setOperator(self::LIKE_OPERATOR)->setComparisonType(self::LIKE_COMPARISON_TYPES['both']);
+
         return $this;
     }
 
@@ -105,27 +104,28 @@ class SimpleRule extends FilterRule
     public function exactMatch()
     {
         $this->operator = self::DEFAULT_OPERATOR;
+
         return $this;
     }
 
-
     /**
      * @param mixed $filterValue
+     *
      * @return mixed
      */
     public function getValue($filterValue)
     {
         if ($this->isLikeComparison()) {
             switch ($this->comparisonType) {
-                case self::LIKE_COMPARISON_TYPES['left'] : {
+                case self::LIKE_COMPARISON_TYPES['left']:
                     return "%{$filterValue}";
-                }
-                case self::LIKE_COMPARISON_TYPES['right'] : {
+
+                case self::LIKE_COMPARISON_TYPES['right']:
                     return "{$filterValue}%";
-                }
-                case self::LIKE_COMPARISON_TYPES['both'] : {
+
+                case self::LIKE_COMPARISON_TYPES['both']:
                     return "%{$filterValue}%";
-                }
+
                 default:
                     return "%{$filterValue}%";
             }

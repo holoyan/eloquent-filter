@@ -2,10 +2,10 @@
 
 namespace holoyan\EloquentFilter\Tests;
 
-use Illuminate\Database\Schema\Blueprint;
-use Orchestra\Testbench\TestCase;
 use Faker\Factory;
 use holoyan\EloquentFilter\Filterable;
+use Illuminate\Database\Schema\Blueprint;
+use Orchestra\Testbench\TestCase;
 
 class BaseTestCase extends TestCase
 {
@@ -42,16 +42,16 @@ class BaseTestCase extends TestCase
         $faker = Factory::create();
         for ($i = 0; $i < 30; $i++) {
             $user = User::create([
-                'name' => $faker->name,
-                'email' => $faker->email,
+                'name'   => $faker->name,
+                'email'  => $faker->email,
                 'b_date' => $faker->dateTime(),
-                'height' => $faker->numberBetween(50, 200)
+                'height' => $faker->numberBetween(50, 200),
             ]);
 
             for ($j = 1; $j <= rand(1, 3); $j++) {
                 Product::create([
-                    'name' => $faker->name,
-                    'user_id' => $user->id
+                    'name'    => $faker->name,
+                    'user_id' => $user->id,
                 ]);
             }
         }
@@ -69,7 +69,6 @@ class User extends \Illuminate\Database\Eloquent\Model
         return $this->hasMany(Product::class);
     }
 }
-
 
 class Product extends \Illuminate\Database\Eloquent\Model
 {

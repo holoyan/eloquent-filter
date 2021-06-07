@@ -26,23 +26,26 @@ abstract class FilterRule
     protected $builder;
 
     /**
-     * @param  string  $filterKey
+     * @param string $filterKey
      * @param $filterValue
      */
     abstract public function handle(string $filterKey, $filterValue): void;
 
     /**
-     * @param  Builder  $builder
+     * @param Builder $builder
+     *
      * @return $this
      */
     public function setBuilder(Builder $builder)
     {
         $this->builder = $builder;
+
         return $this;
     }
 
     /**
      * @param string $filterKey
+     *
      * @return Expression | string
      */
     public function getColumn(string $filterKey)
@@ -51,17 +54,20 @@ abstract class FilterRule
     }
 
     /**
-     * @param  string  $column
+     * @param string $column
+     *
      * @return $this
      */
     public function setColumn(string $column)
     {
         $this->column = $column;
+
         return $this;
     }
 
     /**
      * @param $value
+     *
      * @return $this
      */
     public function setValue($value)
@@ -77,6 +83,7 @@ abstract class FilterRule
 
     /**
      * @param $filterValue
+     *
      * @return mixed
      */
     public function getValue($filterValue)

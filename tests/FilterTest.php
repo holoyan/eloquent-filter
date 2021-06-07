@@ -6,7 +6,6 @@ use Carbon\Carbon;
 
 class FilterTest extends BaseTestCase
 {
-
     public function setUp(): void
     {
         parent::setUp();
@@ -19,7 +18,7 @@ class FilterTest extends BaseTestCase
     {
         $user = User::inRandomOrder()->first();
         $request = [
-            'name' => $user->name,
+            'name'  => $user->name,
             'email' => $user->email,
         ];
 
@@ -34,7 +33,7 @@ class FilterTest extends BaseTestCase
     {
         $user = User::inRandomOrder()->first();
         $request = [
-            'name' => $user->name . 'test',
+            'name'  => $user->name.'test',
             'email' => $user->email,
         ];
 
@@ -50,15 +49,15 @@ class FilterTest extends BaseTestCase
         $user = User::inRandomOrder()->first();
 
         User::create([
-            'name' => $user->name,
-            'email' => $user->email . 'test',
-            'b_date' =>$user->b_date,
-            'height' => $user->height
+            'name'   => $user->name,
+            'email'  => $user->email.'test',
+            'b_date' => $user->b_date,
+            'height' => $user->height,
         ]);
 
         $request = [
-            'name' => $user->name,
-            'email' => $user->email . 'test',
+            'name'  => $user->name,
+            'email' => $user->email.'test',
         ];
 
         $filteredUser = User::filter($request, UserFilter::class)->get();
@@ -67,7 +66,6 @@ class FilterTest extends BaseTestCase
         $filteredUser = User::filter(['name' => $user->name], UserFilter::class)->get();
         $this->assertEquals(2, $filteredUser->count());
     }
-
 
     /**
      * @test
@@ -78,7 +76,7 @@ class FilterTest extends BaseTestCase
         $actualCount = User::where('height', '>', $user->height)->count();
 
         $request = [
-            'height' => $user->height
+            'height' => $user->height,
         ];
 
         $filteredUser = User::filter($request, UserFilter::class)->get();
@@ -95,25 +93,24 @@ class FilterTest extends BaseTestCase
 
         foreach (User::inRandomOrder()->take(rand(2, 10))->get() as $user) {
             Product::create([
-                'name' => $product->name,
-                'user_id' => $user->id
+                'name'    => $product->name,
+                'user_id' => $user->id,
             ]);
         }
 
-        $actualCount = User::whereHas('products', function($query) use ($product){
-           $query->where('name', $product->name);
+        $actualCount = User::whereHas('products', function ($query) use ($product) {
+            $query->where('name', $product->name);
         })->count();
 
         $request = [
             'products' => [
-                'name' => $product->name
-            ]
+                'name' => $product->name,
+            ],
         ];
 
         $filteredUser = User::filter($request, UserFilter::class)->get();
         $this->assertEquals($actualCount, $filteredUser->count());
     }
-
 
     /**
      * @test
@@ -139,17 +136,17 @@ class FilterTest extends BaseTestCase
         ];
 
         $request1 = [
-            'email' => $user->email,
+            'email'  => $user->email,
             'b_date' => $between,
         ];
 
         $request2 = [
-            'email' => $user->email,
+            'email'  => $user->email,
             'b_date' => $outDate1,
         ];
 
         $request3 = [
-            'email' => $user->email,
+            'email'  => $user->email,
             'b_date' => $outDate1,
         ];
 
@@ -162,5 +159,4 @@ class FilterTest extends BaseTestCase
         $filteredUser = User::filter($request3, UserFilter::class)->get();
         $this->assertEquals(0, $filteredUser->count());
     }
-
 }
