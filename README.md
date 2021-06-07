@@ -198,9 +198,9 @@ if you want to use `like` comparison type you can use one of those methods:
         return [
             // where name="value"
             'name' => SimpleRule::make(),
-            // where name like "%value"
-            'name' => SimpleRule::make()->startsWith(),
             // where name like "value%"
+            'name' => SimpleRule::make()->startsWith(),
+            // where name like "%value"
             'name' => SimpleRule::make()->endsWith(),
             // where name like "%value%"
             'name' => SimpleRule::make()->contains()
