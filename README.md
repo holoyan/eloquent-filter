@@ -43,7 +43,7 @@ PHP >= 7.1
  
  ```php
 [
-    'name'       => 'jo',
+    'email'       => 'jo',
     'categories'  => [3, 4],
     'role' => 'admin'
 ]
@@ -101,7 +101,7 @@ class UserFilter extends Filter
     public function rules()
     {
         return [
-            'name' => SimpleRule::make()->startsWith(),
+            'email' => SimpleRule::make()->startsWith(),
             'categories' => SimpleRule::make(),
             'role' => SimpleRule::make(),
         ];
