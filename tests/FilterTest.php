@@ -3,6 +3,7 @@
 namespace holoyan\EloquentFilter\Tests;
 
 use Carbon\Carbon;
+use Faker\Factory;
 
 class FilterTest extends BaseTestCase
 {
@@ -158,5 +159,28 @@ class FilterTest extends BaseTestCase
 
         $filteredUser = User::filter($request3, UserFilter::class)->get();
         $this->assertEquals(0, $filteredUser->count());
+    }
+
+    /**
+     * @test
+     */
+    public function nested_rule_test()
+    {
+        $faker = Factory::create();
+        $startDate = $faker->dateTime();
+        $endDate = $faker->dateTime();
+
+        $request = [
+            'date'  => [
+                'from' => $startDate,
+                'to' => $endDate
+            ],
+        ];
+
+        $filteredUser = User::filter($request, UserFilter::class)->get();
+        $this->assertEquals(
+            User::where('b_date', '<=', $endDate)->where('b_date', '>=', $startDate)->get()->count(),
+            $filteredUser->count()
+        );
     }
 }
