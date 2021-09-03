@@ -12,7 +12,8 @@ PHP >= 7.1
    - [Customize column](#customize-column)
    - [Customize value](#customize-value)
    - [Available filters](#available-filters)
- - [Nested Filter (Relation Filter)](#nested-filter)
+- [Relation Filter](#relation-filter)
+- [Nested Filter](#nested-filter)
  - [Extending filter](#extending-filter)
    - [Custom Rules](#custom-rules)
  - [Credits](#credits)
@@ -219,9 +220,9 @@ if you want to use `like` comparison type you can use one of those methods:
         ];
 
 ```
- - `RelationRule::class` - for relation filter, check [bellow](#nested-filter) for more details
+ - `RelationRule::class` - for relation filter, check [bellow](#relation-filter) for more details
     
-## Nested filter
+## Relation filter
 
 
 Suppose `User` has `Product` relation, and we want to return all users which have product which name starts with 'cook'
@@ -238,6 +239,19 @@ Suppose `User` has `Product` relation, and we want to return all users which hav
 ```
 
 This allows you recursively pass any rules you want
+
+## Nested filter
+
+To make nested filter we need to use `NestedRule::class`
+```php
+        return [
+            'b_date' => NestedRule::make()->setRules([
+                'from' => SimpleRule::make()->setOperator('>='),
+                'to' => SimpleRule::make()->setOperator('<='),
+            ])
+        ];
+
+```
 
 ## Extending filter
 

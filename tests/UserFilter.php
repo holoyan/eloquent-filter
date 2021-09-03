@@ -3,6 +3,7 @@
 namespace holoyan\EloquentFilter\Tests;
 
 use holoyan\EloquentFilter\Filter;
+use holoyan\EloquentFilter\Rules\NestedRule;
 use holoyan\EloquentFilter\Rules\RawRule;
 use holoyan\EloquentFilter\Rules\RelationRule;
 use holoyan\EloquentFilter\Rules\SimpleRule;
@@ -22,6 +23,10 @@ class UserFilter extends Filter
                 'user_id' => SimpleRule::make(),
             ]),
             'b_date' => DateRule::make(),
+            'date' => NestedRule::make()->setColumn('b_date')->setRules([
+                'from' => SimpleRule::make()->setOperator('>='),
+                'to' => SimpleRule::make()->setOperator('<='),
+            ])
         ];
     }
 }
