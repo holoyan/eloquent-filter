@@ -1,19 +1,19 @@
 # Eloquent Filter
 
-PHP >= 7.1
-
-
 ## Table of Content
 
  - [Introduction](#introduction)
+ - [Requirement](#requirement)
  - [Installation](#installation)
  - [Basic Usage](#basic-usage)
    - [Dynamic filters](#dynamic-filter)
    - [Customize column](#customize-column)
    - [Customize value](#customize-value)
    - [Available filters](#available-filters)
- - [Nested Filter (Relation Filter)](#nested-filter)
- - [Extending filter](#extending-filter)
+- [Ordering](#ordering)
+- [Relation Filter](#relation-filter)
+- [Nested Filter](#nested-filter)
+- [Extending filter](#extending-filter)
    - [Custom Rules](#custom-rules)
  - [Credits](#credits)
  - [License](#license) 
@@ -28,6 +28,10 @@ PHP >= 7.1
     $users = User::filter($request->all())->get();
 
 ```
+
+## Requirement
+
+PHP >= 7.1
    
  
  ## Installation
@@ -219,9 +223,29 @@ if you want to use `like` comparison type you can use one of those methods:
         ];
 
 ```
- - `RelationRule::class` - for relation filter, check [bellow](#nested-filter) for more details
+ - `RelationRule::class` - for relation filter, check [bellow](#relation-filter) for more details
+
+## Ordering
+
+To order result use `OrderRule` rule
+
+```php
+    // filter request
+    $request = [
+        'order' => 'desc'
+    ];
+
+
+    // filter class
+    return [
+        'name' => SimpleRule::make(),
+        // other rules ......
+        'order' => OrderRule::make()->setColumn('id'),
+    ];
+```
+
     
-## Nested filter
+## Relation filter
 
 
 Suppose `User` has `Product` relation, and we want to return all users which have product which name starts with 'cook'
@@ -238,6 +262,19 @@ Suppose `User` has `Product` relation, and we want to return all users which hav
 ```
 
 This allows you recursively pass any rules you want
+
+## Nested filter
+
+To make nested filter we need to use `NestedRule::class`
+```php
+        return [
+            'b_date' => NestedRule::make()->setRules([
+                'from' => SimpleRule::make()->setOperator('>='),
+                'to' => SimpleRule::make()->setOperator('<='),
+            ])
+        ];
+
+```
 
 ## Extending filter
 

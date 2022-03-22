@@ -3,6 +3,8 @@
 namespace holoyan\EloquentFilter\Tests;
 
 use Carbon\Carbon;
+use Faker\Factory;
+use Illuminate\Support\Facades\DB;
 
 class FilterTest extends BaseTestCase
 {
@@ -158,5 +160,84 @@ class FilterTest extends BaseTestCase
 
         $filteredUser = User::filter($request3, UserFilter::class)->get();
         $this->assertEquals(0, $filteredUser->count());
+    }
+
+    /**
+     * @test
+     */
+    public function nested_rule_test()
+    {
+        $faker = Factory::create();
+        $startDate = $faker->dateTime();
+        $endDate = $faker->dateTime();
+
+        $request = [
+            'date'  => [
+                'from' => $startDate,
+                'to' => $endDate
+            ],
+        ];
+
+        $filteredUser = User::filter($request, UserFilter::class)->get();
+        $this->assertEquals(
+            User::where('b_date', '<=', $endDate)->where('b_date', '>=', $startDate)->get()->count(),
+            $filteredUser->count()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function order_by_id_desc_test()
+    {
+        $request = [
+            'order' => 'desc'
+        ];
+
+        $latest = DB::table('users')->orderBy('id', 'desc')->first();
+        $filteredUser = User::filter($request, UserFilter::class)->first();
+        $this->assertEquals($latest->id, $filteredUser->id);
+    }
+
+    /**
+     * @test
+     */
+    public function order_by_id_asc_test()
+    {
+        $request = [
+            'order' => 'asc'
+        ];
+
+        $latest = DB::table('users')->orderBy('id', 'asc')->first();
+        $filteredUser = User::filter($request, UserFilter::class)->first();
+        $this->assertEquals($latest->id, $filteredUser->id);
+    }
+
+    /**
+     * @test
+     */
+    public function order_by_b__date__desc_test()
+    {
+        $request = [
+            'orderByDate' => 'desc'
+        ];
+
+        $latest = DB::table('users')->orderBy('b_date', 'desc')->first();
+        $filteredUser = User::filter($request, UserFilter::class)->first();
+        $this->assertEquals($latest->id, $filteredUser->id);
+    }
+
+    /**
+     * @test
+     */
+    public function order_by_b__date__asc_test()
+    {
+        $request = [
+            'orderByDate' => 'asc'
+        ];
+
+        $latest = DB::table('users')->orderBy('b_date', 'asc')->first();
+        $filteredUser = User::filter($request, UserFilter::class)->first();
+        $this->assertEquals($latest->id, $filteredUser->id);
     }
 }
